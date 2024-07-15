@@ -2,6 +2,7 @@
 using ChatAPI.DAL.Interfaces;
 using ChatAPI.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatAPI.DAL.Extensions
@@ -15,11 +16,11 @@ namespace ChatAPI.DAL.Extensions
             services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
-        public static void AddDbContext(this IServiceCollection services)
+        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ChatDbContext>(options =>
             {
-                options.UseNpgsql("YourConnectionString");
+                options.UseNpgsql(configuration.GetConnectionString("Default"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
         }

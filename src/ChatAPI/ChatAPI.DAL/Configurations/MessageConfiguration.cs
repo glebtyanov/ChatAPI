@@ -12,7 +12,7 @@ namespace ChatAPI.DAL.Configurations
 
             builder.HasOne(s => s.Chat)
                 .WithMany(m => m.Messages)
-                .HasForeignKey(s => s.Chat)
+                .HasForeignKey(s => s.ChatId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
