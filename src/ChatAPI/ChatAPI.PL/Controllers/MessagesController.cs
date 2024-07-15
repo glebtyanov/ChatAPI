@@ -5,20 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChatAPI.PL.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class MessagesController(IMessagesService messagesService) : ControllerBase
     {
         private readonly MessagesMapper _mapper = new();
-        
+
         [HttpPost]
         public async Task<IActionResult> Create(MessageCreateDto messageCreateDto)
         {
             var messageToCreate = _mapper.Map(messageCreateDto);
-            
+
             var message = await messagesService.CreateAsync(messageToCreate);
-            
+
             return CreatedAtAction(nameof(GetById), new { id = message.Id }, message);
         }
 
@@ -26,7 +25,7 @@ namespace ChatAPI.PL.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var message = await messagesService.GetAsync(id);
-            
+
             return Ok(message);
         }
 

@@ -7,7 +7,7 @@
         public DateTime Timestamp { get; set; }
         public int AuthorId { get; set; }
         public int ChatId { get; set; }
-        
+
         public User? Author { get; set; }
         public Chat? Chat { get; set; }
     }

@@ -42,7 +42,7 @@ namespace ChatAPI.DAL.Data
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("ChatAPI.DAL.Models.Message", b =>

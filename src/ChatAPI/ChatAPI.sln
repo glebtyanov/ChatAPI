@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAPI.BLL", "ChatAPI.BLL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAPI.DAL", "ChatAPI.DAL\ChatAPI.DAL.csproj", "{4F886CFE-88A8-40F4-B521-CD7D077708A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\..\tests\UnitTests\UnitTests.csproj", "{A0BBFD71-B51D-4643-88D1-17569ABB085F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "..\..\tests\IntegrationTests\IntegrationTests.csproj", "{9A02CA95-7DFC-48A8-A347-892AA305F5F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{4F886CFE-88A8-40F4-B521-CD7D077708A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F886CFE-88A8-40F4-B521-CD7D077708A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F886CFE-88A8-40F4-B521-CD7D077708A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0BBFD71-B51D-4643-88D1-17569ABB085F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0BBFD71-B51D-4643-88D1-17569ABB085F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0BBFD71-B51D-4643-88D1-17569ABB085F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0BBFD71-B51D-4643-88D1-17569ABB085F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A02CA95-7DFC-48A8-A347-892AA305F5F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A02CA95-7DFC-48A8-A347-892AA305F5F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A02CA95-7DFC-48A8-A347-892AA305F5F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A02CA95-7DFC-48A8-A347-892AA305F5F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

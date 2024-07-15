@@ -12,6 +12,7 @@ namespace ChatAPI.DAL.Configurations
 
             builder.HasOne(s => s.Admin)
                 .WithMany(u => u.Chats)
+                .HasForeignKey(s => s.AdminId)
                 .IsRequired();
         }
     }

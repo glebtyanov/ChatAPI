@@ -13,7 +13,7 @@ namespace ChatAPI.DAL.Configurations
             builder.HasMany(x => x.Messages)
                 .WithOne(x => x.Author)
                 .HasForeignKey(x => x.AuthorId);
-            
+
             builder.HasMany(x => x.Chats)
                 .WithOne(x => x.Admin)
                 .HasForeignKey(x => x.AdminId);

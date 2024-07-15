@@ -1,7 +1,7 @@
-﻿using ChatAPI.BLL.Interfaces;
+﻿using ChatAPI.BLL.Exceptions;
+using ChatAPI.BLL.Interfaces;
 using ChatAPI.DAL.Interfaces;
 using ChatAPI.DAL.Models;
-using ChatAPI.DAL.Repositories;
 
 namespace ChatAPI.BLL.Services
 {
@@ -25,7 +25,7 @@ namespace ChatAPI.BLL.Services
 
             if (message is null)
             {
-                throw new ArgumentException("Message not found");
+                throw new NotFoundException();
             }
 
             return message;
@@ -37,7 +37,7 @@ namespace ChatAPI.BLL.Services
 
             if (message is null || message.AuthorId != userId)
             {
-                throw new ArgumentException("Message not found");
+                throw new NotFoundException();
             }
 
             await messagesRepository.RemoveAsync(message);
@@ -46,10 +46,10 @@ namespace ChatAPI.BLL.Services
         public async Task<Message> UpdateAsync(int id, Message updated)
         {
             var message = await messagesRepository.GetByIdAsync(id);
-            
+
             if (message is null)
             {
-                throw new ArgumentException("Chat not found");
+                throw new NotFoundException();
             }
 
             updated.Id = message.Id;
@@ -59,5 +59,4 @@ namespace ChatAPI.BLL.Services
             return updated;
         }
     }
-
 }

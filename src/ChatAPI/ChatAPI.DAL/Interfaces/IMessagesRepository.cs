@@ -4,6 +4,5 @@ namespace ChatAPI.DAL.Interfaces
 {
     public interface IMessagesRepository : IRepositoryBase<Message>
     {
-        
     }
 }

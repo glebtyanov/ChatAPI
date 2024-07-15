@@ -34,7 +34,7 @@ namespace ChatAPI.DAL.Repositories
 
         public async Task<IEnumerable<TEntity>> GetListWhereAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.Run(() => Context.Set<TEntity>().Where<TEntity>(predicate));
+            return await Task.Run(() => Context.Set<TEntity>().Where(predicate));
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -54,7 +54,7 @@ namespace ChatAPI.DAL.Repositories
 
         public async Task UpdateAsync(TEntity model)
         {
-            Context.Entry(model).State = EntityState.Modified;
+            Context.Update(model);
             await Context.SaveChangesAsync();
         }
 

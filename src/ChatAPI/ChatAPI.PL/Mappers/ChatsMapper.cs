@@ -8,6 +8,5 @@ namespace ChatAPI.PL.Mappers
     public partial class ChatsMapper
     {
         public partial Chat Map(ChatCreateDto chatCreateDto);
-        
     }
 }

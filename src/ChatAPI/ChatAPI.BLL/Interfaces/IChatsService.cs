@@ -8,7 +8,7 @@ namespace ChatAPI.BLL.Interfaces
 
         Task<Message> SendMessageAsync(int chatId, int authorId, string text);
 
-        Task<IEnumerable<Chat>> GetForUserAsync(int userId);
+        Task<IEnumerable<Chat>> GetWhereUserIsAdminAsync(int userId);
 
         Task<Chat> GetAsync(int id);
 
@@ -16,7 +16,7 @@ namespace ChatAPI.BLL.Interfaces
 
         Task<Chat> UpdateAsync(int id, Chat updated);
 
-        Task<IEnumerable<Chat>> GetByName(string name);
-        Task<bool> ExistsWithName(string name);
+        Task<Chat> GetByNameAsync(string name);
+        Task<bool> ExistsWithNameAsync(string name);
     }
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ChatAPI.DAL.Data
 {
     [DbContext(typeof(ChatDbContext))]
-    [Migration("20240715051935_Initial")]
+    [Migration("20240715052943_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace ChatAPI.DAL.Data
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("ChatAPI.DAL.Models.Message", b =>

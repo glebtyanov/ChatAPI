@@ -1,22 +1,35 @@
-﻿using ChatAPI.BLL.Interfaces;
+﻿using ChatAPI.BLL.Exceptions;
+using ChatAPI.BLL.Interfaces;
 using ChatAPI.DAL.Interfaces;
 using ChatAPI.DAL.Models;
-using ChatAPI.DAL.Repositories;
 
 namespace ChatAPI.BLL.Services
 {
-    public class ChatsService(IChatsRepository chatsRepository, IMessagesRepository messagesRepository) : IChatsService
+    public class ChatsService(
+        IChatsRepository chatsRepository,
+        IMessagesRepository messagesRepository,
+        IUsersRepository usersRepository) : IChatsService
     {
         public async Task<Chat> CreateAsync(Chat chat)
         {
+            if (await ExistsWithNameAsync(chat.Name))
+            {
+                throw new BadRequestException();
+            }
+
             await chatsRepository.CreateAsync(chat);
 
             return chat;
         }
 
-        public async Task<IEnumerable<Chat>> GetForUserAsync(int userId)
+        public async Task<IEnumerable<Chat>> GetWhereUserIsAdminAsync(int userId)
         {
-            return await chatsRepository.GetAllForUserAsync(userId);
+            if (!await usersRepository.ExistsAsync(u => u.Id == userId))
+            {
+                throw new NotFoundException();
+            }
+
+            return await chatsRepository.GetWhereUserIsAdminAsync(userId);
         }
 
         public async Task<Chat> GetAsync(int id)
@@ -25,7 +38,7 @@ namespace ChatAPI.BLL.Services
 
             if (chat is null)
             {
-                throw new ArgumentException("Chat not found");
+                throw new NotFoundException();
             }
 
             return chat;
@@ -35,9 +48,14 @@ namespace ChatAPI.BLL.Services
         {
             var chat = await chatsRepository.GetByIdAsync(id);
 
-            if (chat is null || chat.AdminId != userId)
+            if (chat is null)
             {
-                throw new ArgumentException("Chat not found");
+                throw new NotFoundException();
+            }
+
+            if (chat.AdminId != userId)
+            {
+                throw new BadRequestException();
             }
 
             await chatsRepository.RemoveAsync(chat);
@@ -46,10 +64,10 @@ namespace ChatAPI.BLL.Services
         public async Task<Chat> UpdateAsync(int id, Chat updated)
         {
             var chat = await chatsRepository.GetByIdAsync(id);
-            
+
             if (chat is null)
             {
-                throw new ArgumentException("Chat not found");
+                throw new NotFoundException();
             }
 
             updated.Id = chat.Id;
@@ -59,12 +77,19 @@ namespace ChatAPI.BLL.Services
             return updated;
         }
 
-        public async Task<IEnumerable<Chat>> GetByName(string name)
+        public async Task<Chat> GetByNameAsync(string name)
         {
-            return await chatsRepository.GetListWhereAsync(x => x.Name == name);
+            var chat = await chatsRepository.GetWhereAsync(x => x.Name == name);
+
+            if (chat is null)
+            {
+                throw new NotFoundException();
+            }
+
+            return chat;
         }
 
-        public async Task<bool> ExistsWithName(string name)
+        public async Task<bool> ExistsWithNameAsync(string name)
         {
             return await chatsRepository.ExistsAsync(x => x.Name == name);
         }
@@ -73,8 +98,7 @@ namespace ChatAPI.BLL.Services
         {
             var message = new Message { ChatId = chatId, AuthorId = authorId, Text = text };
             await messagesRepository.CreateAsync(message);
-            return message;
+            return (await messagesRepository.GetByIdAsync(message.Id))!;
         }
     }
-
 }

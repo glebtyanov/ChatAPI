@@ -7,6 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ChatAPI.DAL\ChatAPI.DAL.csproj" />
+        <ProjectReference Include="..\ChatAPI.DAL\ChatAPI.DAL.csproj"/>
     </ItemGroup>
 </Project>
