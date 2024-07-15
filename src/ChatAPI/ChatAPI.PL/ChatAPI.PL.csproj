@@ -9,7 +9,13 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1"/>
+        <PackageReference Include="Riok.Mapperly" Version="4.0.0-next.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ChatAPI.BLL\ChatAPI.BLL.csproj" />
+      <ProjectReference Include="..\ChatAPI.DAL\ChatAPI.DAL.csproj" />
     </ItemGroup>
 
 </Project>

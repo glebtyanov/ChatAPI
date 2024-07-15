@@ -8,7 +8,7 @@ namespace ChatAPI.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(u => u.FullName).IsRequired().HasMaxLength(100);
+            builder.Property(u => u.Name).IsRequired().HasMaxLength(100);
 
             builder.HasMany(x => x.Messages)
                 .WithOne(x => x.Author)

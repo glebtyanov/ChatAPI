@@ -3,8 +3,8 @@
     public class User
     {
         public int Id { get; set; }
-        public string? FullName { get; set; }
-        
+        public string? Name { get; set; }
+        public string? ConnectionId { get; set; }
         public ICollection<Chat>? Chats { get; set; }
         public ICollection<Message>? Messages { get; set; }
     }

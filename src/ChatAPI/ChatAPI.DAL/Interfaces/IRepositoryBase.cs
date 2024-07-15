@@ -9,9 +9,10 @@ namespace ChatAPI.DAL.Interfaces
         Task<T?> GetWhereAsync(Expression<Func<T, bool>> predicate);
         Task<IEnumerable<T>> GetListWhereAsync(Expression<Func<T, bool>> predicate);
         Task RemoveAsync(T model);
-        Task AddAsync(T model);
+        Task CreateAsync(T model);
         Task AddRangeAsync(IEnumerable<T> models);
         Task UpdateAsync(T model);
         Task<int> CountAsync();
+        Task<bool> ExistsAsync(Expression<Func<T, bool>> predicate);
     }
 }

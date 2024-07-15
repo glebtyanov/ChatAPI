@@ -10,7 +10,7 @@ namespace ChatAPI.DAL.Repositories
     {
         protected readonly ChatDbContext Context = context;
 
-        public async Task AddAsync(TEntity model)
+        public async Task CreateAsync(TEntity model)
         {
             Context.Set<TEntity>().Add(model);
             await Context.SaveChangesAsync();
@@ -45,6 +45,11 @@ namespace ChatAPI.DAL.Repositories
         public async Task<int> CountAsync()
         {
             return await Context.Set<TEntity>().CountAsync();
+        }
+
+        public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await Context.Set<TEntity>().AnyAsync(predicate);
         }
 
         public async Task UpdateAsync(TEntity model)
